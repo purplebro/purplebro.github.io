@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/05/25/2019河北省大学生程序设计竞赛（重现赛）/index.html">
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-25T14:21:22.992Z">
+<meta property="og:updated_time" content="2019-05-25T15:49:04.172Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019河北省大学生程序设计竞赛（重现赛）">
 
@@ -361,23 +361,44 @@
 <h3 id="Problem-A"><a href="#Problem-A" class="headerlink" title="Problem A"></a>Problem A</h3><p>Unsolved.</p>
 <hr>
 <h3 id="Problem-B"><a href="#Problem-B" class="headerlink" title="Problem B"></a>Problem B</h3><p>Solved by Robin_Lo. 02:33:22 (+1)</p>
-<p>题意：求 $\sum^{n}_{i=1}q^i \pmod{p}$。</p>
+<p>题意：</p>
+<ul>
+<li>求 $\sum^{n}_{i=1}q^i \pmod{p}$。</li>
+</ul>
 <p>题解：</p>
 <ul>
 <li>分块做，先求出前 $\sqrt{n}$ 个，后面每个块乘上 $q^{\sqrt{n}}$，剩下不完整的块暴力算，复杂度 $O(T\sqrt{n})$。</li>
-<li>矩阵快速幂做，$f<em>i = f</em>{i-1}\times q + q$。</li>
-<li>递归做。</li>
+<li>矩阵快速幂做，$f[i] = f[i-1] \times q + q$。</li>
+<li>递归做，$a[i] = a[\frac{2}{i}]+a[\frac{2}{i}]\times q^{\frac{2}{i}}$。</li>
 </ul>
 <hr>
 <h3 id="Problem-C"><a href="#Problem-C" class="headerlink" title="Problem C"></a>Problem C</h3><p>Solved by Robin_Lo.  02:18:47 (+)</p>
 <p>题意：</p>
+<ul>
+<li>攻打一条直线上的 $n$ 个国家，攻打第 $i$ 个国家的费用是左边已被攻打国家位置到右边被攻打国家位置长度$\times cost_i$，求把全部国家攻打完的最小费用。</li>
+</ul>
 <p>题解：</p>
+<ul>
+<li>区间 $dp$ 问题。假设我们现在要处理区间 $[i,j]$ 这一段的国家，如果我攻打了一个国家 $k(i&lt;k&lt;j)$，那此    时要交的费用是 $cost_k \times(j-i)$，攻打过后，这段区间就分成了 $[i,k-1]$ 和 $[k+1,j]$ 两段。根据题目的    描述我们可以发现，因为 $k$ 已经被攻打了，所以这两段区间其实已经相互独立了，即如果我们攻打其中一个区间里的国家，是不会影响到另外一个区间的</li>
+<li><p>这样下来，我们只需要枚举一个区间里第一个要攻打的国家就好了，</p>
+</li>
+<li><p>$dp[i][j]=min(dp[i][j],dp[i][k-1]+dp[k+1][j]+cost[k]\times(j-i))$ ,$i\le k \le j$ 且 $dp[i][i]=cost[i]$。</p>
+<p>​    时间复杂度是 $O(n^3)$</p>
+</li>
+</ul>
 <hr>
 <h3 id="Problem-D"><a href="#Problem-D" class="headerlink" title="Problem D"></a>Problem D</h3><p>Unsolved.</p>
 <hr>
 <h3 id="Problem-E"><a href="#Problem-E" class="headerlink" title="Problem E"></a>Problem E</h3><p>Solved by Robin_Lo. 02:53:10 (+2)</p>
 <p>题意：</p>
+<ul>
+<li>现在有 $2n$个人，编号为 $[1,n]$ 的人按顺序站好，现在告诉你 $[n+1,2n]$ 的人站在谁的前面，如此形成了一    个两行 $n$ 列的矩形站位。现在 $[1,n]$ 的人都向 $[n+1,2n]$ 中的一人连一条线，现在问你 $[1,n]$ 里每个人连的线会与多少其它的线相交。</li>
+</ul>
 <p>题解：</p>
+<ul>
+<li>现在我们来考虑第 $i$ 个人的答案会是多少，首先我们可以先计算 $[1,i-1]$ 的人里，有多少个人的线是与第 $i$ 号的线是相交的。假设第 $i$ 号的线连向 $x$ ，那么如果$[1,i-1]$ 中有线连向了 $x$ 的右方，那这根线必定与第 $i$ 号线相交。假设 $x$ 在第 $j$ 号的对面，我们只要统计出有多少线是连到 $[j+1,n]$ 的对面就好了，我们可以用树状数组来解决这个问题。</li>
+<li>现在我们计算出了第 $i$ 个人的线会与多少 $[1~i-1]$ 的人的线相交，剩下只要算出与 $[i+1,n]$ 的人的线相交的数量就好了。这里的求法其实与之前类似，假设第 $i$ 号的线连向 $x$，$x$ 在第 $j$ 号的对面，我们只要统计出$[i+1,n]$ 中有多少线是连到 $[1,i-1]$ 的对面就好了，这里我们从大到小的统计并维护树状数组就 $OK$ 了。</li>
+</ul>
 <hr>
 <h3 id="Problem-F"><a href="#Problem-F" class="headerlink" title="Problem F"></a>Problem F</h3><p>Unsolved.</p>
 <hr>
@@ -385,8 +406,14 @@
 <p>签到题。</p>
 <hr>
 <h3 id="Problem-H"><a href="#Problem-H" class="headerlink" title="Problem H"></a>Problem H</h3><p>Solved by purple_bro. 00:21:55 (+1)</p>
-<p>题意：求 $N^k$ 的数根，$1 \le k \le 2$。</p>
-<p>题解：一个数 $n$ 在十进制下的数根就是 $n \pmod{9}$, 如果是 0 就加 1。 </p>
+<p>题意：</p>
+<ul>
+<li>求 $N^k$ 的数根，$1 \le k \le 2$。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>一个数 $n$ 在十进制下的数根就是 $n \pmod{9}$, 如果是 0 就加 1。 </li>
+</ul>
 <hr>
 <h3 id="Problem-I"><a href="#Problem-I" class="headerlink" title="Problem I"></a>Problem I</h3><p>Unsolve.</p>
 <hr>
@@ -396,8 +423,14 @@
 <p>签到题。</p>
 <hr>
 <h3 id="Problem-L"><a href="#Problem-L" class="headerlink" title="Problem L"></a>Problem L</h3><p>Solved by purple_bro. 03:13:18 (+1)</p>
-<p>题意：给你一个 $N \times N$ 的网格图，每个网格上都有一个数，一个机器人可以从网格上的任意一个地方出发往上下            左右的方向走任意多步，走的过程会经过一些数，按照经过的顺序能获得一个数，求不能获得的最小的            数。$1 \le N \le 50$。</p>
-<p>题解：暴力求，考虑数的增长速度和获得的数的增长速度，获得的数可以看成是一棵四叉树，算了一下不会超过 7             层，$bfs$ 搞一下，从小到大把第一个 $!vis[i]$ 输出就可以。</p>
+<p>题意：</p>
+<ul>
+<li>给你一个 $N \times N$ 的网格图，每个网格上都有一个数，一个机器人可以从网格上的任意一个地方出发往上左右的方向走任意多步，走的过程会经过一些数，按照经过的顺序能获得一个数，求不能获得的最小的数。$1 \le N \le 50$。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>暴力求，考虑数的增长速度和获得的数的增长速度，获得的数可以看成是一棵四叉树，算了一下不会超过 7             层，$bfs$ 搞一下，从小到大把第一个 $!vis[i]$ 输出就可以。</li>
+</ul>
 
       
     </div>

@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/05/25/2019河北省大学生程序设计竞赛（重现赛）/index.html">
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-25T15:49:04.172Z">
+<meta property="og:updated_time" content="2019-05-26T13:13:05.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="2019河北省大学生程序设计竞赛（重现赛）">
 
@@ -358,7 +358,15 @@
 <a id="more"></a>
 <p><a href="https://ac.nowcoder.com/acm/contest/903#question" target="_blank" rel="noopener">链接</a></p>
 <hr>
-<h3 id="Problem-A"><a href="#Problem-A" class="headerlink" title="Problem A"></a>Problem A</h3><p>Unsolved.</p>
+<h3 id="Problem-A"><a href="#Problem-A" class="headerlink" title="Problem A"></a>Problem A</h3><p>Upsolved by purple_bro.</p>
+<p>题意：</p>
+<ul>
+<li>给你一张 $100\times100$ 的坐标，还有 $n$ 个钉子的坐标，然后问你是否能把一个半径为 $r$ 的圆从下边界移到上边界且不触碰到左右边界和钉子。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>考虑建图，钉子与钉子之间距离小于直径的连边，钉子与左右边界小于直径的连边，看看能否跑一条从左边界到右边界的通路，可以输出 $No$ 否则为 $Yes$。</li>
+</ul>
 <hr>
 <h3 id="Problem-B"><a href="#Problem-B" class="headerlink" title="Problem B"></a>Problem B</h3><p>Solved by Robin_Lo. 02:33:22 (+1)</p>
 <p>题意：</p>
@@ -415,9 +423,25 @@
 <li>一个数 $n$ 在十进制下的数根就是 $n \pmod{9}$, 如果是 0 就加 1。 </li>
 </ul>
 <hr>
-<h3 id="Problem-I"><a href="#Problem-I" class="headerlink" title="Problem I"></a>Problem I</h3><p>Unsolve.</p>
+<h3 id="Problem-I"><a href="#Problem-I" class="headerlink" title="Problem I"></a>Problem I</h3><p>Upsolved by purple_bro.</p>
+<p>题意：</p>
+<ul>
+<li>在一张平面图上有 $n$ 颗星星。一个参数 $c$ ，$q$ 个询问。每颗星星有个亮度 $s_i$，在时间 $t$ 的亮度为 $s_i + t \pmod{c+1}$，每个询问 $t_ix_1y_1x_2y_2$ 表示在时间 $t_i$ ，左上角为 $x_1y_1$，右下角为 $x_2y_2$ 的矩形里面的星星总亮度为多少。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>cdq 分治，把询问拆成四个点，第一维先对 $x$ 排序，然后分治合并的时候对 $y$ 排序，然后用树状数组对对应的询问 $t$ 进行查询，容斥一下即可计算出答案，$t$ 较大需要进行离散化。</li>
+</ul>
 <hr>
-<h3 id="Problem-J"><a href="#Problem-J" class="headerlink" title="Problem J"></a>Problem J</h3><p>Unsolve.</p>
+<h3 id="Problem-J"><a href="#Problem-J" class="headerlink" title="Problem J"></a>Problem J</h3><p>Upsolved by purple_bro.</p>
+<p>题意：</p>
+<ul>
+<li>有 $n$ 个人，每个人喜欢另一个人，问如何配对使得没配对的人尽量少。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>拓扑排序。假设 $s \to t$ ，那么 $t$ 的入度 ++，贪心的取入度小的出来，用个 $priority$_$queue$，贪心的配对。</li>
+</ul>
 <hr>
 <h3 id="Problem-K"><a href="#Problem-K" class="headerlink" title="Problem K"></a>Problem K</h3><p>Solved by purple_bro. 00:41:21 (+1)</p>
 <p>签到题。</p>

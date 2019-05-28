@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/02/07/套路-小技巧/index.html">
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-04-02T13:41:57.768Z">
+<meta property="og:updated_time" content="2019-05-28T13:47:42.949Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="套路 &amp; 小技巧">
 
@@ -356,6 +356,28 @@
       
         <hr>
 <a id="more"></a>
+<h1 id="补题记录（不定时更新）"><a href="#补题记录（不定时更新）" class="headerlink" title="补题记录（不定时更新）"></a>补题记录（不定时更新）</h1><hr>
+<p>2019/5/26：</p>
+<ul>
+<li>河北省赛, A I J，几何转图判连通；cdq 分治；贪心拓扑排序匹配。</li>
+<li>HDU - 6326，树上勇者斗恶龙，转有根树后，贪心的取，每取一个点就往父节点合并，并查集维护。</li>
+<li>计蒜之道第一场 C，树 dp，边权两两不同，枚举 $gcd$ 保证复杂度严格 $O(n^2)$。</li>
+<li>uestc Training for dp I，数位 dp，用个 pair 很好写。</li>
+</ul>
+<p>2019/5/27：</p>
+<ul>
+<li>HDU - 6540，省赛树 dp，$dp[i][j]$ 表示以 $i$ 结点为根，选中关键点种离 $i$ 最大距离为 $j$ 的方案数，枚举深度对复杂度的贡献是严格 $O(n^2)$ 的。</li>
+<li>HDU - 6532，省赛 A 费用流，鬼畜建图。</li>
+<li>ZOJ - 4100，浙江省赛 A，线段树下标维护 $size$，连边先在连通块内连，再从大到小连，要优化常数。</li>
+<li>牛客练习赛 46，D 二分答案，贪心打怪兽。E 鬼畜树状数组。</li>
+</ul>
+<p>2019/5/28：</p>
+<ul>
+<li>华东理工校赛 F，倍增 + 反向倍增，均摊复杂度 $O(nlogn)$。</li>
+<li>GYM - 102082J，染色查询连通子图大小，染色是一个点一个点染的，所以对每种颜色用一个 set 维护，set 维护插入的点在 dfs 序上相同颜色的前驱和后继结点，然后算一算贡献。</li>
+<li>计算之道第二场 C，$dp[i][j]$ 表示前 $i$ 个数，选了第 $i$ 个数的子序列长度为 $j$，另一个子序列最后一个数的最小值，转移时枚举长度 $j$，看看可以插入在哪个序列。</li>
+</ul>
+<hr>
 <h1 id="利用-meet-in-the-middle-计算最大团-amp-最大独立集"><a href="#利用-meet-in-the-middle-计算最大团-amp-最大独立集" class="headerlink" title="利用 $meet$ $in$ $the$ $middle$ 计算最大团 &amp; 最大独立集"></a>利用 $meet$ $in$ $the$ $middle$ 计算最大团 &amp; 最大独立集</h1><hr>
 <p>首先，<strong>原图的最大独立集 = 补图的最大团</strong>。<br>状压一下。<br>假设有 $n$ 个点。<br>先分成 $S_1$ $S_2$ 两堆，$f[i]$ 表示选了 $S_1$ 堆子集 $i$ 的点中的最大团，$g[i]$ 表示选了 $S_2$ 堆子集 $i$ 的点中的最大团，然后两堆分别用高维前缀和计算出来，计算一堆的复杂度是 $O(2^{\frac{n}{2}}\frac{n}{2}^{2})$。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; s1; i++)</span><br><span class="line">    f[<span class="number">1</span> &lt;&lt; i] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span> &lt;&lt; s1; i++) &#123;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s1; j++) <span class="keyword">if</span> (!(i &amp; (<span class="number">1</span> &lt;&lt; j))) &#123;</span><br><span class="line">        <span class="keyword">bool</span> flag = <span class="literal">true</span>;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; s1; k++) <span class="keyword">if</span> (i &amp; (<span class="number">1</span> &lt;&lt; k))</span><br><span class="line">            flag &amp;= G[j][k];</span><br><span class="line">        f[i | (<span class="number">1</span> &lt;&lt; j)] = max(f[i | (<span class="number">1</span> &lt;&lt; j)], f[i] + flag);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最后合并的时候，枚举 $S_1$ 堆的状态，把 $S_2$ 堆中与 $S_1$ 堆中的点没有边相连的消去。然后统计答案。<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1</span> &lt;&lt; s1; i++) &#123;</span><br><span class="line">    <span class="keyword">int</span> flag = (<span class="number">1</span> &lt;&lt; s2) - <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt; s1; j++) <span class="keyword">if</span> (i &amp; (<span class="number">1</span> &lt;&lt; j)) &#123;</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; s2; k++) <span class="keyword">if</span> ((flag &amp; (<span class="number">1</span> &lt;&lt; k)) &amp;&amp; !G[j][k + s1])</span><br><span class="line">            flag ^= <span class="number">1</span> &lt;&lt; k;</span><br><span class="line">    &#125;</span><br><span class="line">    res = max(res, f[i] + g[flag]);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -392,7 +414,7 @@
 <p><a href="https://www.cnblogs.com/fht-litost/p/9562807.html" target="_blank" rel="noopener">直接贴个师兄的线性基学习总结</a></p>
 <hr>
 <h1 id="概率期望相关"><a href="#概率期望相关" class="headerlink" title="概率期望相关"></a>概率期望相关</h1><hr>
-<p>一般都是期望 $dp$ 或者概率 $dp$。<br>期望 $dp​$ 大多是从后往前，转移大多是</p>
+<p>一般都是期望 $dp$ 或者概率 $dp$。<br>期望 $dp$ 大多是从后往前，转移大多是</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dp[i] = <span class="number">1</span> / x * (dp[i + <span class="number">1</span>] + v[i]);</span><br></pre></td></tr></table></figure>
 <p>诸如这种形式。</p>
 <p>求期望还可以利用期望的可加性，用概率 $dp$ 求出每一个 $dp[i]$，然后 $ans += dp[i] * v[i]$</p>
@@ -401,13 +423,13 @@
 <h1 id="利用主席树和-hash-解决最短路"><a href="#利用主席树和-hash-解决最短路" class="headerlink" title="利用主席树和 $hash$ 解决最短路"></a>利用主席树和 $hash$ 解决最短路</h1><hr>
 <p>当 $dis$ 无法直接用数组表示的时候。</p>
 <ul>
-<li>比如边权是 $2^w$ 的图，让你找出从 $S$ 到 $T​$ 的最短路。<ul>
+<li>比如边权是 $2^w$ 的图，让你找出从 $S$ 到 $T$ 的最短路。<ul>
 <li>主席树维护 $dis[i]$ 的一个 $01$ 串，还有 $hash$ 值，$dis$ 之间的比较利用 $hash$，从高位开始比较，如果 $hash$ 值相同则往低位走，不同则往高处走，复杂度是 $O(logn)$ 的。</li>
-<li>而更新操作，你可以找 $w​$ 这一位是否为 $0​$，是的话直接更新，否则就找往后第一个 $0​$ 的位置，然后把中间这一段连续的 $1​$ 修改为 $0​$，有个 $trick​$ 直接把中间这段的结点连到一棵全 $0​$ 的树上。<code>if (l &lt;= L &amp;&amp; R &lt;= r) rt = 0;</code></li>
+<li>而更新操作，你可以找 $w$ 这一位是否为 $0$，是的话直接更新，否则就找往后第一个 $0$ 的位置，然后把中间这一段连续的 $1$ 修改为 $0$，有个 $trick$ 直接把中间这段的结点连到一棵全 $0$ 的树上。<code>if (l &lt;= L &amp;&amp; R &lt;= r) rt = 0;</code></li>
 </ul>
 </li>
 <li>比如一个点权有优先级的图，让你找出从 $S$ 到 $T$ 的一条优先级大的点尽量少的路径。<ul>
-<li>也是用主席树维护 $dis​$，还有 $hash​$ 值，只不过这道比较直观，不用进位，直接写就可以。</li>
+<li>也是用主席树维护 $dis$，还有 $hash$ 值，只不过这道比较直观，不用进位，直接写就可以。</li>
 </ul>
 </li>
 </ul>
@@ -415,6 +437,9 @@
 <h1 id="数位-dp-求和"><a href="#数位-dp-求和" class="headerlink" title="数位 dp 求和"></a>数位 dp 求和</h1><hr>
 <p>$dp.first$ 表示符合条件的个数，$dp.second$ 表示和。</p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= top; i++) &#123;</span><br><span class="line">    pii t = dfs(cur - <span class="number">1</span>);</span><br><span class="line">    add(res.first, t.first);</span><br><span class="line">    add(res.first, i * <span class="built_in">pow</span>(<span class="number">10</span>, cur) * t.first + t.second);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<hr>
+<h1 id="倍增-二分或者倍增-反向倍增"><a href="#倍增-二分或者倍增-反向倍增" class="headerlink" title="倍增 + 二分或者倍增 + 反向倍增"></a>倍增 + 二分或者倍增 + 反向倍增</h1><hr>
+<p>若当前区间合法，则继续倍增右端点，直到遇到一个不合法的右端点，再在这中间进行二分，或者反向倍增，这样子暴力处理可以保证复杂度是均摊的 $O(nlogn)$。</p>
 <hr>
 
       
@@ -594,7 +619,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#利用-meet-in-the-middle-计算最大团-amp-最大独立集"><span class="nav-number">1.</span> <span class="nav-text">利用 $meet$ $in$ $the$ $middle$ 计算最大团 &amp; 最大独立集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区间-k-段子段和最大"><span class="nav-number">2.</span> <span class="nav-text">区间 $k$ 段子段和最大</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区间加等比等差数列"><span class="nav-number">3.</span> <span class="nav-text">区间加等比等差数列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图上的路径-xor-问题"><span class="nav-number">4.</span> <span class="nav-text">图上的路径 $xor$ 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可持久化-01Trie-的一些主要应用"><span class="nav-number">5.</span> <span class="nav-text">可持久化 $01Trie$ 的一些主要应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求区间最大连续-xor-和。"><span class="nav-number">5.1.</span> <span class="nav-text">求区间最大连续 $xor$ 和。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求树上路径的点权与-val-的最大-xor"><span class="nav-number">5.2.</span> <span class="nav-text">求树上路径的点权与 $val$ 的最大 $xor$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gauss"><span class="nav-number">6.</span> <span class="nav-text">$Gauss$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性基应用"><span class="nav-number">7.</span> <span class="nav-text">线性基应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概率期望相关"><span class="nav-number">8.</span> <span class="nav-text">概率期望相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用主席树和-hash-解决最短路"><span class="nav-number">9.</span> <span class="nav-text">利用主席树和 $hash$ 解决最短路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数位-dp-求和"><span class="nav-number">10.</span> <span class="nav-text">数位 dp 求和</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#补题记录（不定时更新）"><span class="nav-number">1.</span> <span class="nav-text">补题记录（不定时更新）</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用-meet-in-the-middle-计算最大团-amp-最大独立集"><span class="nav-number">2.</span> <span class="nav-text">利用 $meet$ $in$ $the$ $middle$ 计算最大团 &amp; 最大独立集</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区间-k-段子段和最大"><span class="nav-number">3.</span> <span class="nav-text">区间 $k$ 段子段和最大</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#区间加等比等差数列"><span class="nav-number">4.</span> <span class="nav-text">区间加等比等差数列</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图上的路径-xor-问题"><span class="nav-number">5.</span> <span class="nav-text">图上的路径 $xor$ 问题</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#可持久化-01Trie-的一些主要应用"><span class="nav-number">6.</span> <span class="nav-text">可持久化 $01Trie$ 的一些主要应用</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#求区间最大连续-xor-和。"><span class="nav-number">6.1.</span> <span class="nav-text">求区间最大连续 $xor$ 和。</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#求树上路径的点权与-val-的最大-xor"><span class="nav-number">6.2.</span> <span class="nav-text">求树上路径的点权与 $val$ 的最大 $xor$</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Gauss"><span class="nav-number">7.</span> <span class="nav-text">$Gauss$</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#线性基应用"><span class="nav-number">8.</span> <span class="nav-text">线性基应用</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#概率期望相关"><span class="nav-number">9.</span> <span class="nav-text">概率期望相关</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#利用主席树和-hash-解决最短路"><span class="nav-number">10.</span> <span class="nav-text">利用主席树和 $hash$ 解决最短路</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数位-dp-求和"><span class="nav-number">11.</span> <span class="nav-text">数位 dp 求和</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#倍增-二分或者倍增-反向倍增"><span class="nav-number">12.</span> <span class="nav-text">倍增 + 二分或者倍增 + 反向倍增</span></a></li></ol></div>
             
 
           </div>

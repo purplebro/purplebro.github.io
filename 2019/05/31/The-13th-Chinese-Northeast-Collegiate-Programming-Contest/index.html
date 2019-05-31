@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/05/31/The-13th-Chinese-Northeast-Collegiate-Programming-Contest/index.html">
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-05-31T13:31:34.774Z">
+<meta property="og:updated_time" content="2019-05-31T16:10:17.044Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="The 13th Chinese Northeast Collegiate Programming Contest">
 
@@ -363,21 +363,24 @@
 <h3 id="Problem-B"><a href="#Problem-B" class="headerlink" title="Problem B"></a>Problem B</h3><p>Solved by Robin_Lo. 03:06 (+2)</p>
 <p>题意：</p>
 <ul>
-<li>s</li>
+<li>一个糖果店里有 $n$ 个糖果和 $m$ 种糖果，每个糖果都有一个独立的价值。题目要求选出一定量的糖果，使得 $\frac{q}{c}$ 的值最大，其中 $q$ 为选定的糖果的价值的总和，$c$ 为同类糖果最多的糖果数量。如果一种糖果被选定，那这种糖果的数量必须大于给定的数 $L_i$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>s</li>
+<li>首先我们知道，假设 $c$ 的值为 $j$ ，那所有 $L_i \le j$ 的种类 $i$ 都可以被选择，而且一种糖果的选定的数量得不小于 $L_i$ 。</li>
+<li>这里是一个比较明显的贪心，即 $c$ 确定的时候我们要尽可能的多选糖果，而且要多选价值大的糖果。</li>
+<li>所以我们先对 $L_i$ 进行排序，然后重大到小的进行枚举，假设枚举到种类 $i$ ，首先如果 $L_i$ 大于 $i$ 类糖果的总数则忽略，否则让 $i$ 类的糖果全部加入到一个优先队列，优先队列以“这个糖果的价值在同类糖果排第几”为基准进行比较。加入到队列后，我们就可以让优先队列里所有排名小于等于 $L_i$ 的糖果出队，并把他们的价值累加，$c$ 此时设为 $L_i$ 。</li>
+<li>当全部 $L_i$ 都枚举过后，我们再枚举 $c$（从 $L_m+1$ 开始枚举），并用以上的发展将糖果pop出优先队列，直到优先队列为空。算法的时间复杂度为 $O(nlogn)$。</li>
 </ul>
 <hr>
 <h3 id="Problem-C"><a href="#Problem-C" class="headerlink" title="Problem C"></a>Problem C</h3><p>Solved by Water_sheep.  01:03 (+3)</p>
 <p>题意：</p>
 <ul>
-<li>s</li>
+<li>给定平面上 $n$ 条直线，统计有多少对直线相交（重合的直线也算相交）。$n\le100000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>s</li>
+<li>斜率不同的直线必然相交，斜率相同的直线重合也会相交。按照斜率统计直线的数量，再按照斜率和截距统计数量，最后统计答案。</li>
 </ul>
 <hr>
 <h3 id="Problem-D"><a href="#Problem-D" class="headerlink" title="Problem D"></a>Problem D</h3><p>Unsolved.</p>
@@ -395,21 +398,24 @@
 <h3 id="Problem-F"><a href="#Problem-F" class="headerlink" title="Problem F"></a>Problem F</h3><p>Solved by Water_sheep. 04:39 (+)</p>
 <p>题意：</p>
 <ul>
-<li>x</li>
+<li>两个队伍，每队 $3$ 个人在一个 $n$ 个点 $m$ 条边的有向图玩游戏。图上的节点有一个棋子，$6$ 个人按照给定的顺序轮流移动棋子，不能移动的那个人所属的队伍算输。每个队的人都希望自己队能赢，不能赢也尽量逼平。但是有几个二五仔，他们会希望自己的队伍输，不输也尽量平。问每个点作为起点最终的结果。$n \le 100000,m \le 200000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>x</li>
+<li>我们可以做一个 $dp$，$dp[u][i]$ 表示在 $u$ 这个点轮到第 $i$ 个人决策的最终结果，有三种状态，未知、胜、败。</li>
+<li>显然，每个出度为 $0$ 的节点对于每一个人而言都是必败的，然后我们考虑怎么转移。假如不考虑二五仔，要是我前一个是队友，那么我的胜态可以直接转移给他，败态需要前一个点所有后继都是败态才能转移。同理要是我前一个是对手，那么我的败态可以直接转移到他的胜态，他的所有后继都要是胜态他才会是败态。</li>
+<li>假如有二五仔的话，队友的转移就刚好相反，败态直接转移，胜态要他的后继全部是胜才行，对手同理。我们就把原图建反向边，把从初始的必败态出发，假如能直接转移的就加进队列，不能的就把入度 $-1$（原图的出度，反向边的入度），直到没有入边才加进队列（表示原图的后继全部更新完了）。</li>
+<li>假如有节点始终处于未知态表示这个点是平局。</li>
 </ul>
 <hr>
 <h3 id="Problem-G"><a href="#Problem-G" class="headerlink" title="Problem G"></a>Problem G</h3><p>Solved by Water_sheep. 02:14 (+)</p>
 <p>题意：</p>
 <ul>
-<li>x</li>
+<li>给定平面上 $n$ 个边平行坐标的矩形，每个矩形覆盖若干方格。用最少的操作次数上下左右移动矩形，使得存在一个方格被所有矩形覆盖。$n \le 1000000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>x</li>
+<li>容易发现上下的移动和左右的移动是独立的，可以把二维拆分成两个一维求解。问题变成有若干个区间，用尽量少的操作移动区间使得存在一个点被所有区间覆盖。容易发现，最终的那个点必然在某个区间内部，需要移动的区间必然是左端点或右端点移到该点，也就说区间的端点存在最优解。那么把所有区间的两个端点排序，枚举每个点，移动到下一个点对答案的变化是与上一个点的距离$\times$（左边右端点的数量 $+$ 右边左端点的数量）。</li>
 </ul>
 <hr>
 <h3 id="Problem-H"><a href="#Problem-H" class="headerlink" title="Problem H"></a>Problem H</h3><p>Solved by purple_bro. 00:03:01 (+)</p>

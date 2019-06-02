@@ -7,7 +7,7 @@
 
 <html class="theme-next pisces use-motion" lang="zh-Hans">
 <head><meta name="generator" content="Hexo 3.8.0">
-  <meta charset="UTF-8">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 <meta name="theme-color" content="#222">
@@ -86,7 +86,7 @@
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://i.imgur.com/m1Gtu4V.png">
-<meta property="og:updated_time" content="2019-02-01T13:11:50.000Z">
+<meta property="og:updated_time" content="2019-06-02T11:55:50.879Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="SCAU专题训练I - 图 解题报告">
 <meta name="twitter:image" content="https://i.imgur.com/m1Gtu4V.png">
@@ -125,7 +125,7 @@
 
 
 
-  <title>SCAU专题训练I - 图 解题报告 | purple_bro's blog</title>
+  <title>SCAU专题训练I - 图 解题报告 | purple_bro's blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -144,7 +144,7 @@
     
   
 
-  <div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -386,7 +386,7 @@
 <h1 id="J"><a href="#J" class="headerlink" title="J"></a>J</h1><p>一个 $spfa$ 判负环的模板题。</p>
 <hr>
 <h1 id="K"><a href="#K" class="headerlink" title="K"></a>K</h1><p>差分约束，发现相加是连续的，所以可以表示成前缀和的形式，所以就愉快的跑个最短路就可以了。</p>
-<p>$s<em>i + s</em>{i+1} + s<em>{i + 2} + … + s_j = sum_j - sum</em>{i-1}$<br>$sum<em>j - sum</em>{i-1} &gt; w$<br>$sum<em>j - sum</em>{i-1} &lt; w$</p>
+<p>$s_i + s_{i+1} + s_{i + 2} + … + s_j = sum_j - sum_{i-1}$<br>$sum_j - sum_{i-1} &gt; w$<br>$sum_j - sum_{i-1} &lt; w$</p>
 <p><a href="https://blog.csdn.net/consciousman/article/details/53812818" target="_blank" rel="noopener">差分约束学习</a></p>
 <hr>
 <h1 id="L"><a href="#L" class="headerlink" title="L"></a>L</h1><p>给出货币之间的汇率，问你是否存在一种方案，使得货币经过若干次转换之后再转换回来，钱变多了，输出转换次数最少的方案。考虑 $dp$，$dp[i][j][k]$ 表示 $i$ 货币转换成 $j$ 货币 $k$ 次时最大的汇率。然后跑 $floyd$ 来转移，当 $dp[i][i][k]$ 大于 $1.01$ 就可以输出了，路径记录就是记录转移时的 $j$。</p>
@@ -865,7 +865,24 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
   
 
 

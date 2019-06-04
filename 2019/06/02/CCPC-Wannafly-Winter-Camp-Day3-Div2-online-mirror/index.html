@@ -85,7 +85,7 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/02/CCPC-Wannafly-Winter-Camp-Day3-Div2-online-mirror/index.html">
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-02T11:53:08.852Z">
+<meta property="og:updated_time" content="2019-06-04T02:10:08.405Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CCPC-Wannafly Winter Camp Day3 (Div2, online mirror)">
 
@@ -361,62 +361,110 @@
 <h3 id="Problem-A"><a href="#Problem-A" class="headerlink" title="Problem A"></a>Problem A</h3><p>Solved by Water_sheep. 00:39 (+)</p>
 <p>题意：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <hr>
 <h3 id="Problem-B"><a href="#Problem-B" class="headerlink" title="Problem B"></a>Problem B</h3><p>Unsolved.</p>
 <hr>
 <h3 id="Problem-C"><a href="#Problem-C" class="headerlink" title="Problem C"></a>Problem C</h3><p>Unsolved.</p>
 <hr>
-<h3 id="Problem-D"><a href="#Problem-D" class="headerlink" title="Problem D"></a>Problem D</h3><p>Unsolved.</p>
+<h3 id="Problem-D"><a href="#Problem-D" class="headerlink" title="Problem D"></a>Problem D</h3><p>Upsolved by purple_bro.</p>
+<p>题意：</p>
+<ul>
+<li>给你一个 $n$ 个点 $m$ 条边的无向图，每条边有边权，让你删去一些边，使得 $\sum\limits_{i=1}^{n}\sum\limits_{j=i+1}^{n} d(i,j)$ 最小，$d(i,j)$ 表示 $i$ 到 $j$ 的最短路。$n \le 14$</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>显然最后肯定是要删成一棵树，那考虑做一个生成树状压 dp，$dp[S][i]$ 表示点集 $S$ 里面的点连通，并且此时根为 $i$ 的最大贡献。</li>
+<li>那么转移就是枚举 $S$ 的子集 $T$ ，考虑做一个合并。<ul>
+<li>$dp[S][i] = max(dp[S][i], dp[T][j] + dp[S - T][i] + dis[i][j]\times|T|\times|n-T|)$ </li>
+</ul>
+</li>
+<li>优化一点常数，然后记得判 $j$ 是否在点集 $T$ 中。</li>
+</ul>
 <hr>
-<h3 id="Problem-E"><a href="#Problem-E" class="headerlink" title="Problem E"></a>Problem E</h3><p>Unsolved.</p>
+<h3 id="Problem-E"><a href="#Problem-E" class="headerlink" title="Problem E"></a>Problem E</h3><p>Upsolved by purple_bro.</p>
+<p>题意：</p>
+<ul>
+<li>给一棵无根树，然后依次再给出 $m$ 个点，给出的点 $k_i$ 表示以 $k_i$ 为根建一棵有根树，然后再在每个结点挂上 $T(k_{i-1})$，这样就建成了一棵 $T(k_i)$，对于给出的每个点顺序回答这棵有根树的最大独立集。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>树的最大独立集有个贪心取法，每次取叶子，然后父亲都不取，依次取到根。</li>
+<li>那么对于每棵有根树 $T$ 我们能用树 dp 预处理出以 $k_i$ 为根时根取不取，假设 $T(k_{i-1})$ 取了，那 $T(k_i)$ 就不能取（因为 $T(k_{i-1})$ 挂在每个结点），否则通过预处理的 dp 确定根有没有取。</li>
+<li>$g[i]$ 表示以 $i$ 为根时 $i$ 点取不取，$f[i]$ 表示 $i$ 的父亲取不取，$O(n)$ 可解决。<ul>
+<li>$T(k_{i-1})$ 根取了，$ans = preans \times n$</li>
+<li>$T(k_{i-1})$ 根没取，$ans = preans \times n + $ 原树最大独立集</li>
+</ul>
+</li>
+</ul>
 <hr>
 <h3 id="Problem-F"><a href="#Problem-F" class="headerlink" title="Problem F"></a>Problem F</h3><p>Solved by purple_bro. 01:02 (+)</p>
 <p>题意：</p>
 <ul>
-<li>求  $\sum\limits_{i=1}^{n} \sum\limits_{i=1}^{n} \mu(gcd(i, j))$。</li>
+<li>求  $\sum\limits_{i=1}^{n} \sum\limits_{i=1}^{n} \mu(gcd(i, j))$ $n \le 10^7$。</li>
 </ul>
 <p>题解：</p>
 <ul>
 <li>化简得  $\sum\limits_{T=1}^{n}\lfloor \frac{n}{T} \rfloor ^2 \sum\limits_{d|T} \mu(d)\mu(\frac{T}{d})$ ，后面是一个狄利克雷卷积的形式，$\mu$ 是积性函数，卷起来也是积性函数，线性筛大力筛。</li>
+<li>Div1 是一个 $n \le 10^{10}$ 的版本， $\mu \ast \mu \ast I \to\mu \ast \epsilon\to\mu$， 然后就是两个杜教筛大力搞。</li>
 </ul>
 <hr>
 <h3 id="Problem-G"><a href="#Problem-G" class="headerlink" title="Problem G"></a>Problem G</h3><p>Solved by Water_sheep. 01:21 (+)</p>
 <p>题意：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <hr>
 <h3 id="Problem-H"><a href="#Problem-H" class="headerlink" title="Problem H"></a>Problem H</h3><p>Solved by Robin_Lo. 02:16 (+)</p>
 <p>题意：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <hr>
 <h3 id="Problem-I"><a href="#Problem-I" class="headerlink" title="Problem I"></a>Problem I</h3><p>Solved by Water_sheep. 03:57 (+4)</p>
 <p>题意：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>s</li>
+<li>咕咕咕</li>
 </ul>
 <hr>
-<h3 id="Problem-J"><a href="#Problem-J" class="headerlink" title="Problem J"></a>Problem J</h3><p>Unsolved.</p>
+<h3 id="Problem-J"><a href="#Problem-J" class="headerlink" title="Problem J"></a>Problem J</h3><p>Upsolved by purple_bro.</p>
+<p>题意：</p>
+<ul>
+<li>给你 $n$ 个字符的加入顺序，字符插入位置在原字符串的每个字符中间，求把字符都插完后的字符串中不同的子序列个数。</li>
+</ul>
+<p>题解：</p>
+<ul>
+<li>比如 $abc$，最后的字符串是 $cbcacbc$，那我们可以考虑倒着做另一种插法，<ul>
+<li>$c$</li>
+<li>$cbc$</li>
+<li>$cbcacbc$</li>
+</ul>
+</li>
+<li>问题就变成了两个字符串合并之后有多少个不同的子序列。</li>
+<li>一个 $dp$:<ul>
+<li><code>if (s[i + 1] == k) dp[i + 1][k] = 1 + sum(dp[i][1 ~ 26])</code></li>
+<li><code>else dp[i + 1][k] = dp[i][k]</code></li>
+</ul>
+</li>
+<li>所以我们就可以构造出 $26$ 个矩阵来进行转移，复杂度 $O(nm^3)$。</li>
+</ul>
 
       
     </div>

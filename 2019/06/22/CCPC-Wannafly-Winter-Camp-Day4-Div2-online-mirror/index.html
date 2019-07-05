@@ -85,9 +85,15 @@
 <meta property="og:url" content="http://yoursite.com/2019/06/22/CCPC-Wannafly-Winter-Camp-Day4-Div2-online-mirror/index.html">
 <meta property="og:site_name" content="purple_bro&#39;s blog">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-06-23T14:51:01.870Z">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/05/Za4YnI.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/05/Za4tBt.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/05/Za4GjA.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/05/Za48cd.png">
+<meta property="og:image" content="https://s2.ax1x.com/2019/07/05/Za4NHP.png">
+<meta property="og:updated_time" content="2019-07-05T06:40:26.360Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CCPC-Wannafly Winter Camp Day4 (Div2, online mirror)">
+<meta name="twitter:image" content="https://s2.ax1x.com/2019/07/05/Za4YnI.png">
 
 
 
@@ -361,11 +367,21 @@
 <h3 id="Problem-A"><a href="#Problem-A" class="headerlink" title="Problem A"></a>Problem A</h3><p>Solved by Water_sheep. 00:21 (+)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>有一个 $m \times m$的网格图，有 $n$ 种宝藏，每种宝藏有两份。可以从任一点出发，每次可以朝上下左右四个方向走，要求先按 $1…n$ 的顺序取宝藏，再按 $n…1$ 的顺序取。求需要移动的最小距离。 $1 \le n,m \le 1000000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li><p>对于第 $i$ 种和第 $i+1$ 种宝藏，拿的顺序只有两种方案，去的时候取了 $i$ 的某一个和 $i+1$ 的某一个，那么回来只能取 $i+1$ 的另一个和 $i$ 的另一个。考虑$dp$，$dp[i][j]$ 表示已经取了前 $i$ 种宝藏，去的时候取的是第 $j$ 个 $(0\le j\le1)$。</p>
+</li>
+<li><p>假设 $dist(a,b)$ 是求 $a$，$b$ 两个点的曼哈顿距离，$p[i][j]$ 表示第 $i$ 种宝藏第 $j$ 个的坐标。</p>
+<ul>
+<li><p>$dp[i][j]=min ( dp[i-1][j]+dist(p[i-1][j],p[i][j])+dist(p[i-1][j \bigoplus 1],p[i][j \bigoplus 1]) ,$</p>
+<p>$dp[i-1][j \bigoplus 1]+dist(p[i-1][j \bigoplus 1],p[i][j])+dist(p[i-1][j],p[i][j \bigoplus 1])$</p>
+</li>
+</ul>
+</li>
+<li><p>最后的答案是 $min(dp[n][0],dp[n][1])+dist(p[n][0],p[n][1])$</p>
+</li>
 </ul>
 <hr>
 <h3 id="Problem-B"><a href="#Problem-B" class="headerlink" title="Problem B"></a>Problem B</h3><p>Unsolved.</p>
@@ -373,21 +389,34 @@
 <h3 id="Problem-C"><a href="#Problem-C" class="headerlink" title="Problem C"></a>Problem C</h3><p>Solved by Robin_Lo. 00:36 (+)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>给一张图 $G$ ，询问是否是最小边覆盖。</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>先统计出所有点的度，若存在度为 $0 $ 的点则显然说明不是最小边覆盖。然后再检查每一条边，若存在一条边，这条边链接的两个点的度都不为 $1$ ，则说明即使删掉这条边也不会影响到这个图的连通性，所以这不是最小边覆盖。否则这是最小边覆盖。时间复杂度为 $O(n+m)$。</li>
 </ul>
 <hr>
 <h3 id="Problem-D"><a href="#Problem-D" class="headerlink" title="Problem D"></a>Problem D</h3><p>Solved by Water_sheep. 04:32 (+)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>有一张 $n$ 行 $m$ 列的网格图（$n$ 条水平线，$m$ 条竖直线）。线的交叉点是图的结点。现在要给每条边定向，且规定一个允许通过次数（$\ge1$）。使得图上存在一个欧拉回路。要求允许通过的次数之和最小。$2 \le n,m \le 1000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>题面很绕，翻译一下就是给图上相邻的结点加尽量少的边使得图（无向图）上有欧拉回路。换句话说就是把每个点的度变成偶数。</li>
+<li><img src="https://s2.ax1x.com/2019/07/05/Za4YnI.png" alt="solution-1"></li>
+<li>如图为 $4*4$ 的网格图，红圈的地方是非法点，初始度为奇数。</li>
+<li>分类讨论<ul>
+<li><img src="https://s2.ax1x.com/2019/07/05/Za4tBt.png" alt="solution-2"></li>
+<li>偶*偶：非法点两两连边</li>
+<li><img src="https://s2.ax1x.com/2019/07/05/Za4GjA.png" alt="solution-3"></li>
+<li>奇*奇：把右上左下（左上右下）的四个点以外的两两连边，然后同一个角落的两个点朝一个合法点连边</li>
+<li><img src="https://s2.ax1x.com/2019/07/05/Za48cd.png" alt="solution-4"></li>
+<li>奇*偶：策略与奇奇类似</li>
+<li><img src="https://s2.ax1x.com/2019/07/05/Za4NHP.png" alt="solution-5"></li>
+<li>不过当偶数为0时是特例</li>
+</ul>
+</li>
 </ul>
 <hr>
 <h3 id="Problem-E"><a href="#Problem-E" class="headerlink" title="Problem E"></a>Problem E</h3><p>Unsolved.</p>
@@ -395,21 +424,24 @@
 <h3 id="Problem-F"><a href="#Problem-F" class="headerlink" title="Problem F"></a>Problem F</h3><p>Solved by Water_sheep. 01:44 (+)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>有一个 $n \times m$ 的国际象棋棋盘（黑白染色）。有一只马，给定起点和终点，问是否可以从起点跳到终点，且跳的路径上黑白格子数量相等。$2 \le n,m \le 1000000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>马的走法会使得每走一步当前格子的颜色改变，因此要起终点的颜色不同才能使得路径的黑白格子数相等。那问题变成了是否可达。通过暴搜可以发现只有当 $2 \times x$ 与 $3\times3$ 时才有不可达点，其余情况都是每个点两两可达。</li>
 </ul>
 <hr>
 <h3 id="Problem-G"><a href="#Problem-G" class="headerlink" title="Problem G"></a>Problem G</h3><p>Solved by Water_sheep. 04:06 (+1)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>对于一个长度为 $n$ 的排列 (下标从 $1$ 开始)，问满足 $i$ 为奇数时 $a[i-1] &lt; a[i]$，否则 $a[i-1]&gt;a[i]$ 的排列的方案数，对 $10^9+7$ 取模。 $1 \le n \le 1000$。</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>合法的排列是奇数位置的值比两边偶数位置的值大，偶数位置的比两边奇数位置的大。显然1只能放在偶数位置，此时排列会被分割成两段。假设 $1$ 放的位置为 $i$ ，那么原排列会被分割成 $[1,i-1]$，$[i+1,n]$ 两段。这两段的起始位置都是奇数下标，且 $1$ 不会对这两段有影响（ $1$ 两边填任意数字都能保证 $1$ 比两边小），即原序列分割成两个子段。对于一个子段而言，我们算合法方案只需关心值的大小关系而不关心具体的值，所以我们可以把子段内的值最小的那个看成该段的 $1$ ，从而继续分割。所以我们计算方案只需要考虑两个子段数字分配的方案。</li>
+<li>$dp[i]$ 表示长度为 $i$ 的排列的合法方案。</li>
+<li>状态转移方程：$dp[i]=\sum\limits_{j=2}^{i}{ dp[j-1] \times dp[n-j] \times C(j-1,i-1) }  $ $(j为偶数)$</li>
+<li>记忆化搜索即可，$n$ 个状态，转移复杂度 $O(n)$，总复杂度 $O(n^2)$。</li>
 </ul>
 <hr>
 <h3 id="Problem-H"><a href="#Problem-H" class="headerlink" title="Problem H"></a>Problem H</h3><p>Unsolved.</p>
@@ -417,11 +449,11 @@
 <h3 id="Problem-I"><a href="#Problem-I" class="headerlink" title="Problem I"></a>Problem I</h3><p>Solved by Robin_Lo. 01:13 (+)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>有 $n$ 张牌，每张牌可以选择召唤一个攻击力为 $a_i$ 的生物，或者使得场上所有生物的攻击力加 $b_i$ 。请问如何抉择，使得场上生物攻击力的总和最高。$1 \le n \le 1000$， $0 \le a,b \le 1000000$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>假设我们选择了 $i$ 个牌进行召唤，则剩下的 $n-i$ 张牌都是用来加 $buff$ 的。这里很明显可以用贪心的思想来使我们利益最大化，先召唤，再加 $buff$。问题是选那些牌进行召唤呢，这里我们也可以利用贪心的思想来解决，我们先计算出每张牌<strong>如果用来召唤的话会多得多少攻击力</strong>，即 $aj-bj \times i$。因为数据范围较小，所以我们可以以这个数为基准进行排序，然后从大到小的选择i张牌进行召唤就好了，同时计算出总攻击力。时间复杂度为 $O(n^2 logn)$。</li>
 </ul>
 <hr>
 <h3 id="Problem-J"><a href="#Problem-J" class="headerlink" title="Problem J"></a>Problem J</h3><p>Unsolved.</p>
@@ -429,11 +461,11 @@
 <h3 id="Problem-K"><a href="#Problem-K" class="headerlink" title="Problem K"></a>Problem K</h3><p>Solved by Water_sheep. 03:33 (+2)</p>
 <p>题意：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>有一棵 $n$ 个节点的树，树有点权。有 $q$ 次询问，每次询问选定一个节点 $u$ ，求树上只交于 $u$ 的两条路径的节点的并的最大权值和。 $n \le 100000，q \le 20$</li>
 </ul>
 <p>题解：</p>
 <ul>
-<li>嘤嘤嘤</li>
+<li>只交于 $u$ 的两条路径可以看成是以 $u$ 为中心的 $4/3/2/1$ 条链或是只有 $u$ 这个节点。所以先做一个树 $dp$ 求出每个节点所能延伸出去的最大权值和的链。询问的时候贪心即可。</li>
 </ul>
 
       
